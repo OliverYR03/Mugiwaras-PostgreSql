@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import certus.edu.pe.repositorio.OpinionesRepositorio;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 import certus.edu.pe.modelo.*;
 
 @Service

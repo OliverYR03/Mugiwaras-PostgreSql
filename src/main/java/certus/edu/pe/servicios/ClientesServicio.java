@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import certus.edu.pe.modelo.Clientes;
 import certus.edu.pe.repositorio.ClientesRepositorio;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 
 @Service
 @Transactional
