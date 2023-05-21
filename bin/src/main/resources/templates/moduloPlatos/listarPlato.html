@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Listar Platos</title>
+	</head>
+	<body>
+		
+	<div align="center"></div>	
+		<h1>Peliculas</h1>
+		<a th:href="@{/platos/nuevo}">Create Nueva Pelicula</a>
+		
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nombre</th>
+					<th>Descripcion</th>
+					<th>Precio</th>
+					<th>Tipo</th>
+					<th>Imagen</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="platos : ${listaPlatos}">
+					<td th:text = "${platos.idplato}">Id</td> 
+					<td th:text = "${platos.nombre}">Nombre</td> 
+					<td th:text = "${platos.descripcion}">Descripcion</td> 
+					<td th:text = "${platos.precio}">Precio</td> 
+					<td th:text = "${platos.tipoplato}">Tipo</td> 
+					<td>
+						<img th:src="${platos.imagen}" style="width: 105px;">
+					</td> 
+					<td><a th:href="@{/platos/actualizar/{id}(id=${platos.idplato})}">Actulizar</a>
+					&nbsp;&nbsp;&nbsp;
+					<a th:href="@{/platos/eliminar/{id}(id=${platos.idplato})}">Eliminar</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	
+	</body>
+</html>

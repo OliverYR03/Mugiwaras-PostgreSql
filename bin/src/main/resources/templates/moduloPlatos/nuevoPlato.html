@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Nuevo Platos</title>
+	</head>
+	<body>
+		
+	<div align="center">	
+		<h1>Nuevo Plato</h1>
+		<form action="#" th:action="@{/platos/guardar}" th:object="${plato}" method="post">
+			<table border="0" cellpadding="10">
+				
+				<tr>
+					<td>Nombre:</td>
+					<td><input type="text" th:field="*{nombre}" /></td>
+				</tr>
+				
+				<tr>
+					<td>Descripcion:</td>
+					<td><input type="text" th:field="*{descripcion}" /></td>
+				</tr>
+				
+				<tr>
+					<td>Precio:</td>
+					<td><input type="text" th:field="*{precio}" /></td>
+				</tr>
+				
+				<tr>
+					<td>Tipo:</td>
+					<td><input type="text" th:field="*{tipoplato}" /></td>
+				</tr>
+				
+				<tr>
+					<td>imagen:</td>
+					<td><input type="text" th:field="*{imagen}" /></td>
+				</tr>
+				
+				<tr>
+					<td colspan="2"><button type="submit"> Save </button></td>
+				</tr>		
+			</table>
+		</form>
+	</div>
+	</body>
+</html>
