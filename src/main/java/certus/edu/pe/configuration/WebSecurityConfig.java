@@ -18,7 +18,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		.antMatchers("/static/js/adminlte.js","/css/**", "/images/**", "/js/**","/video/", "/", "/principal", "/home", "/inicio", "/logeo", "/login","/rest/**")
+		.antMatchers("/static/js/adminlte.js","/css/**", "/images/**", "/js/**","/video/", "/", "/principal","/carta", "/home", "/inicio", "/logeo", "/login","/rest/**")
 		.permitAll()
 		.antMatchers("/platos/listarPlato").hasAnyRole("ADMIN","LECTOR","CREADOR","EDITOR","DEPURADOR")
 		.antMatchers("/platos/nuevo").hasAnyRole("ADMIN","CREADOR")
@@ -26,9 +26,35 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/platos/actualizar/**").hasAnyRole("ADMIN","EDITOR")
 		.antMatchers("/platos/eliminar/**").hasAnyRole("ADMIN","DEPURADOR")
 		
+		.antMatchers("/clientes/listarCliente").hasAnyRole("ADMIN","LECTOR","CREADOR","EDITOR","DEPURADOR")
+		.antMatchers("/clientes/nuevo").hasAnyRole("ADMIN","CREADOR")
+		.antMatchers("/clientes/guardar").hasAnyRole("ADMIN","CREADOR","EDITOR")
+		.antMatchers("/clientes/actualizar/**").hasAnyRole("ADMIN","EDITOR")
+		.antMatchers("/clientes/eliminar/**").hasAnyRole("ADMIN","DEPURADOR")
+		
+		.antMatchers("/personal/listarPersonal").hasAnyRole("ADMIN","LECTOR","CREADOR","EDITOR","DEPURADOR")
+		.antMatchers("/personal/nuevo").hasAnyRole("ADMIN","CREADOR")
+		.antMatchers("/personal/guardar").hasAnyRole("ADMIN","CREADOR","EDITOR")
+		.antMatchers("/personal/actualizar/**").hasAnyRole("ADMIN","EDITOR")
+		.antMatchers("/personal/eliminar/**").hasAnyRole("ADMIN","DEPURADOR")
+		
+		.antMatchers("/opiniones/listarOpinion").hasAnyRole("ADMIN","LECTOR","CREADOR","EDITOR","DEPURADOR")
+		.antMatchers("/opiniones/nuevo").hasAnyRole("ADMIN","CREADOR")
+		.antMatchers("/opiniones/guardar").hasAnyRole("ADMIN","CREADOR","EDITOR")
+		.antMatchers("/opiniones/actualizar/**").hasAnyRole("ADMIN","EDITOR")
+		.antMatchers("/opiniones/eliminar/**").hasAnyRole("ADMIN","DEPURADOR")
+		
+		.antMatchers("/ordenes/listarOrdenes").hasAnyRole("ADMIN","LECTOR","CREADOR","EDITOR","DEPURADOR")
+		.antMatchers("/ordenes/nuevo").hasAnyRole("ADMIN","CREADOR")
+		.antMatchers("/ordenes/guardar").hasAnyRole("ADMIN","CREADOR","EDITOR")
+		.antMatchers("/ordenes/actualizar/**").hasAnyRole("ADMIN","EDITOR")
+		.antMatchers("/ordenes/eliminar/**").hasAnyRole("ADMIN","DEPURADOR")
+		
 		.anyRequest().authenticated()
 		.and().formLogin().loginPage("/login").defaultSuccessUrl("/platos/listarPlato", true).permitAll()
-		.and().logout()
+		.and().logout().logoutUrl("/logout").logoutSuccessUrl("/home")
+        .invalidateHttpSession(true)
+        .deleteCookies("JSESSIONID")
 		.permitAll();
 	}
     
