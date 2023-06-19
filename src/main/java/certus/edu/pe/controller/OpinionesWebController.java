@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import certus.edu.pe.servicios.*;
+import certus.edu.pe.model.exceptions.ResourceNotFoundException;
 import certus.edu.pe.modelo.*;
 @Controller
 @RequestMapping("/opiniones")
@@ -43,15 +44,22 @@ public class OpinionesWebController {
 		}
 		
 		@RequestMapping(value="/eliminar/{id}")
-		public String eliminarOpinion(@PathVariable(name="id") int id) {
+		public String eliminarOpinion(@PathVariable(name="id") int id) throws ResourceNotFoundException {
+			Opiniones opinion = servicio.buscarPorId(id);
+			if (opinion == null) {
+		           throw new ResourceNotFoundException("Opinion not found for id: " + id);
+		       }
 			servicio.borrarPorId(id);
 			return "redirect:/opiniones/listarOpinion";
 		}
 		
 		@RequestMapping(value = "/actualizar/{id}")
-		public ModelAndView editarOpinion(@PathVariable(name="id") int id) {
+		public ModelAndView editarOpinion(@PathVariable(name="id") int id) throws ResourceNotFoundException {
 			ModelAndView mav= new ModelAndView("/moduloOpiniones/editarOpinion");
 			Opiniones opiniones = servicio.buscarPorId(id);
+			if (opiniones == null) {
+	            throw new ResourceNotFoundException("Opinion not found for id: " + id);
+	        }
 			mav.addObject("opiniones", opiniones);
 			return mav;
 			

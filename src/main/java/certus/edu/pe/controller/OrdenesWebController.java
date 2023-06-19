@@ -1,7 +1,6 @@
 package certus.edu.pe.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
+import certus.edu.pe.model.exceptions.ResourceNotFoundException;
 import certus.edu.pe.modelo.Ordenes;
 import certus.edu.pe.servicios.OrdenesServicio;
+
 
 @Controller
 @RequestMapping("/ordenes")
@@ -43,16 +43,23 @@ public class OrdenesWebController {
 	}
 	
 	@RequestMapping(value = "/actualizar/{id}")
-	public ModelAndView editarOrdenes(@PathVariable(name="id") int id) {
+	public ModelAndView editarOrdenes(@PathVariable(name="id") int id) throws ResourceNotFoundException {
 		ModelAndView mav= new ModelAndView("/moduloOrdenes/editarOrdenes");
 		Ordenes ordenes = servicio.buscarporId(id);
+		if (ordenes == null) {
+			throw new ResourceNotFoundException("Orden not found for id: " + id);
+		}
 		mav.addObject("ordenes", ordenes);
 		return mav;
 		
 	}
 	
 	@RequestMapping(value = "/eliminar/{id}")
-	public String eliminarOrdenes(@PathVariable(name = "id") int id) {
+	public String eliminarOrdenes(@PathVariable(name = "id") int id) throws ResourceNotFoundException {
+		Ordenes orden = servicio.buscarporId(id);
+		if(orden == null) {
+			throw new ResourceNotFoundException("Orden not found for id: " + id);
+		}
 		servicio.borrarPorId(id);
 		return "redirect:/ordenes/listarOrdenes";
 	}
