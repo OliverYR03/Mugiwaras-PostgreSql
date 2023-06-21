@@ -1,37 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" th:extends="base">
 <head>
-  <title>Acceso denegado</title>
-  <style>
-    body {
-      text-align: center;
-      margin-top: 200px;
-      font-family: Arial, sans-serif;
-    }
-    
-    h1 {
-      color: red;
-    }
-    
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-    
-    button:hover {
-      background-color: #45a049;
-    }
-  </style>
-</head>
-<body>
-  <h1>NO TIENES PERMISO PARA ACCEDER A ESTA PÁGINA</h1>
-  <button onclick="goBack()">Regresar</button>
+   <link href="css/error.css" rel="stylesheet" type="text/css"/>
+   <title>Error - Comida Japonesa</title>
+   <style>
+	   @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+	   body {
+    background-color: #e7e3e0; /* Fondo pastel */
+    font-family: 'Open Sans';
+    margin: 0;
+    padding: 0;
+}
 
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.face {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+}
+
+h1, p {
+    text-align: center;
+    margin: 0;
+}
+
+h1 {
+	font-weight: 800;
+    font-size: 2em;
+	padding-top: 20px;
+    color: #F04F54;
+    margin-bottom: 16px;
+}
+
+p {
+	font-weight: 400;
+    font-size: 16px;
+    color: #343434;
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+.btn {
+	font-weight: 400;
+	padding: 14px;
+	background-color: #F04F54;
+	color: white;
+	width: 200px;
+	margin: 0 auto;
+	border:none;
+	text-align: center;
+	font-size: 1em;
+	border-radius: 5px;
+	cursor: pointer; 
+	margin-top: 16px;
+	margin-bottom: 50px;
+	}
+   </style>
+</head>
+<body
+    <div class="error-container">
+        <img th:src="@{/images/sad_face.png}" class="face" alt="">
+        <h1>Oops! Algo salió mal.</h1>
+        <p>Parece que no tienes permiso para acceder a esta página.</p>
+        <button class="btn" onclick="goBack();">Regresar</button>
+     </div>
   <script>
     function goBack() {
       window.history.back();
