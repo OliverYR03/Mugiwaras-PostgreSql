@@ -8,21 +8,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+//import javax.persistence.NamedQueries;
+//import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="opiniones")
-@NamedQueries({
-	@NamedQuery(name = "Opiniones.findAll", query = "SELECT p FROM Opiniones p")
-	, @NamedQuery(name  = "Opiniones.findByIdOpinion", query = "SELECT p FROM Opiniones p WHERE p.idopinion = :idopinion")
-	, @NamedQuery(name  = "Opiniones.findByIdPlato", query = "SELECT p FROM Opiniones p WHERE p.idplato = :idplato")
-	, @NamedQuery(name  = "Opiniones.findByNombre", query = "SELECT p FROM Opiniones p WHERE p.idcliente = :idcliente")
-	, @NamedQuery(name  = "Opiniones.findByDescripcion", query = "SELECT p FROM Opiniones p WHERE p.calificacion = :calificacion")
-	, @NamedQuery(name  = "Opiniones.findByPrecio", query = "SELECT p FROM Opiniones p WHERE p.comentario = :comentario")
-	, @NamedQuery(name  = "Opiniones.findByTipoPlato", query = "SELECT p FROM Opiniones p WHERE p.fecha = :fecha")
-})
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+//@NamedQueries({
+	//@NamedQuery(name = "Opiniones.findAll", query = "SELECT p FROM Opiniones p")
+	//, @NamedQuery(name  = "Opiniones.findByIdOpinion", query = "SELECT p FROM Opiniones p WHERE p.idopinion = :idopinion")
+	//, @NamedQuery(name  = "Opiniones.findByIdPlato", query = "SELECT p FROM Opiniones p WHERE p.idplato = :idplato")
+	//, @NamedQuery(name  = "Opiniones.findByNombre", query = "SELECT p FROM Opiniones p WHERE p.idcliente = :idcliente")
+	//, @NamedQuery(name  = "Opiniones.findByDescripcion", query = "SELECT p FROM Opiniones p WHERE p.calificacion = :calificacion")
+	//, @NamedQuery(name  = "Opiniones.findByPrecio", query = "SELECT p FROM Opiniones p WHERE p.comentario = :comentario")
+	//, @NamedQuery(name  = "Opiniones.findByTipoPlato", query = "SELECT p FROM Opiniones p WHERE p.fecha = :fecha")})
 
 public class Opiniones implements Serializable{
 
@@ -34,13 +41,13 @@ public class Opiniones implements Serializable{
 	    @Basic(optional = true)
 		private Integer idopinion;
 		
-		@Basic(optional = true)
-	    @Column(name ="idplato")
-		private Integer idplato;
+		@ManyToOne(optional = false)
+		@JoinColumn(name ="idplato", referencedColumnName = "idplato")
+		private Platos platos;
 		
-		@Basic(optional = true)
-	    @Column(name ="idcliente")
-		private Integer idcliente;
+		@ManyToOne(optional = false)
+	    @JoinColumn(name ="idcliente", referencedColumnName = "idclientes")
+		private Clientes clientess;
 	    
 	    @Column(name ="calificacion")
 		private Integer calificacion;
@@ -51,75 +58,4 @@ public class Opiniones implements Serializable{
 	    @Column(name ="fecha")
 		private String  fecha;
 	    
-	    public Opiniones() {
-	    	
-	    }
-
-		public Opiniones(Integer idopinion, Integer idplato, Integer idcliente, Integer calificacion, String comentario,
-				String fecha) {
-			super();
-			this.idopinion = idopinion;
-			this.idplato = idplato;
-			this.idcliente = idcliente;
-			this.calificacion = calificacion;
-			this.comentario = comentario;
-			this.fecha = fecha;
-		}
-
-		public Integer getIdopinion() {
-			return idopinion;
-		}
-
-		public void setIdopinion(Integer idopinion) {
-			this.idopinion = idopinion;
-		}
-
-		public Integer getIdplato() {
-			return idplato;
-		}
-
-		public void setIdplato(Integer idplato) {
-			this.idplato = idplato;
-		}
-
-		public Integer getIdcliente() {
-			return idcliente;
-		}
-
-		public void setIdcliente(Integer idcliente) {
-			this.idcliente = idcliente;
-		}
-
-		public Integer getCalificacion() {
-			return calificacion;
-		}
-
-		public void setCalificacion(Integer calificacion) {
-			this.calificacion = calificacion;
-		}
-
-		public String getComentario() {
-			return comentario;
-		}
-
-		public void setComentario(String comentario) {
-			this.comentario = comentario;
-		}
-
-		public String getFecha() {
-			return fecha;
-		}
-
-		public void setFecha(String fecha) {
-			this.fecha = fecha;
-		}
-
-		@Override
-		public String toString() {
-			return "Opiniones [idopinion=" + idopinion + ", idplato=" + idplato + ", idcliente=" + idcliente
-					+ ", calificacion=" + calificacion + ", comentario=" + comentario + ", fecha=" + fecha + "]";
-		}
-	    
-	    
 }
-	

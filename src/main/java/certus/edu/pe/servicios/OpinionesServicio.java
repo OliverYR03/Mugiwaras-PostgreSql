@@ -33,8 +33,8 @@ public class OpinionesServicio {
 		Opiniones opinionActual = repositorio.findById(opinionActualizar.getIdopinion()).get();
 		
 		opinionActual.setIdopinion(opinionActualizar.getIdopinion());
-		opinionActual.setIdplato(opinionActualizar.getIdplato());
-		opinionActual.setIdcliente(opinionActualizar.getIdcliente());
+		opinionActual.setPlatos(opinionActualizar.getPlatos());
+		opinionActual.setClientess(opinionActualizar.getClientess());
 		opinionActual.setCalificacion(opinionActualizar.getCalificacion());
 		opinionActual.setComentario(opinionActualizar.getComentario());
 		opinionActual.setFecha(opinionActualizar.getFecha());

@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		.anyRequest().authenticated()
 		.and().formLogin().loginPage("/login").defaultSuccessUrl("/platos/listarPlato", true).permitAll()
-		.and().logout().logoutUrl("/logout").logoutSuccessUrl("/home")
+		.and().logout().logoutSuccessUrl("/login?logout=true").logoutSuccessUrl("/home")
         .invalidateHttpSession(true)
         .deleteCookies("JSESSIONID")
 		.permitAll();

@@ -1,19 +1,28 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{components/head :: head}"}></head>
-<body class="hold-transition sidebar-mini layout-fixed">
- <div>
- <aside th:replace="~{components/menu :: menu}"></aside>
-	<div class="content-wrapper">
-		<section class="content">
-		<div class="row">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head th:replace="layout/layout :: head">
+</head>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<aside th:replace="layout/layout :: sidebar"></aside>
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1>CLIENTES</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+					<li class="breadcrumb-item active"><a th:href="@{/clientes/listarCliente}">clientes</a></li>
+				</ol>
+			</nav>
+		</div>
+		<section class="section dashboard">
+			<div class="row">
                     <div class="col-md-12">
                         <div class="box">
-							<br>
 							 <div class="box-header with-border text-center">
-                                <h1 class="box-title">CLIENTES
-                                </h1>
-                                <a class="btn btn-success" th:href="@{/clientes/nuevo}" ><i class="fa fa-plus-circle"></i>
+                                <a class="btn btn-success float-end" th:href="@{/clientes/nuevo}" ><i class="fa fa-plus-circle"></i>
                                         Agregar</a>
                                 <div class="box-tools pull-right">
                                 </div>
@@ -59,15 +68,12 @@
 							</tfoot>
 				            </table>
 						</div>
-				
-      <div class="container">
-			<br>
-        <div class="row">            
-            
-        </div>
+
       </div>
-      </div>
-                    </div></div></section>
-                    
-</body>	
+                    </div>
+		</section>
+	</main>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+
 </html>

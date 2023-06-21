@@ -1,62 +1,91 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="ISO-8859-1">
-		<title>Editar Personal</title>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <!-- Latest compiled JavaScript -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-    
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.33/dist/sweetalert2.all.min.js"></script>
-	</head>
-	<body>
-		
-	<div align="center">	
-		<h1>Editar Personal</h1>
-		<form action="#" th:action="@{/personal/guardar}" th:object="${personal}" method="post">
-			<table border="0" cellpadding="10">
-				
-				<tr>
-					<td><label class="form-label">Id:</label></td>
-					<td><input class="form-control" type="text" th:field="*{idpersonal}" readonly="readonly" /></td>
-				</tr>
-				
-				<tr>
-					<td><label class="form-label">Nombre:</label></td>
-					<td><input class="form-control" type="text" th:field="*{nombre}" /></td>
-				</tr>
-				
-				<tr>
-					<td><label class="form-label">DNI:</label></td>
-					<td><input class="form-control" type="text" th:field="*{dni}" /></td>
-				</tr>
-				
-				<tr>
-					<td><label class="form-label">Cargo:</label></td>
-					<td><input class="form-control" type="text" th:field="*{cargo}" /></td>
-				</tr>
-				
-				<tr>
-					<td><label class="form-label">Imagen:</label></td></td>
-					<td><input  class="form-control"type="text" th:field="*{imagen}" /></td>
-				</tr>
-				
-				<tr>
-					<td><label class="form-label">Imagen Muestra:</label></td>
-					<td>
-						<img th:src="${personal.imagen}" style="width: 205px;">
-					</td>
-				</tr>
-				
-				
-				<tr>
-					<td colspan="2"><button class="btn btn-success"type="submit"> Guardar </button></td>
-				</tr>		
-				<tr> 
-					<td ><a class="btn btn-info" th:href="@{/personal/listarPersonal}">Cancelar</a></td> 
-				</tr>
-			</table>
-		</form>
-	</div>
-	</body>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head th:replace="layout/layout :: head">
+</head>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<aside th:replace="layout/layout :: sidebar"></aside>
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1>PERSONAL</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/personal/listarPersonal}">personal</a></li>
+					<li class="breadcrumb-item active">editar</li>
+				</ol>
+			</nav>
+		</div>
+		<section class="section dashboard">
+			<div class="row">
+                    <div class="col-md-12">
+                        <div class="box">
+							<!-- FORMULARIO -->
+							<div class="card-body">
+                                <form th:action="@{/personal/guardar}" th:object="${personal}" method="post">
+                                  <div class="row">
+									   <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="disabledTextInput">Id</label>
+                                            <input type="text"   id="disabledInput" class="form-control" th:field="*{idpersonal}"  readonly="readonly" >
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label >Nombre</label>
+                                            <input type="hidden" name="idarticulo" id="idarticulo">
+                                            <input type="text" class="form-control" name="nombre" id="nombre"
+                                              placeholder="escribir nombre" th:field="*{nombre}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                            <div class="form-group"> 
+                                                <label>DNI</label>
+                                               <input class="form-control" type="text"  th:field="*{dni}" placeholder="DNI 8 Dígitos"/>                                      
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label >Cargo</label>
+                                            <input type="text" name="stock" th:field="*{cargo}"class="form-control" placeholder="Stock" required>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label >Imagen</label>
+                                            <input type="text" class="form-control" th:field="*{imagen}"><br>
+                                        </div>
+                                    </div>
+                                    
+                                     <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label >Imagen Muestra:</label>
+                                            <img th:src="${personal.imagen}" style="width: 205px;">
+                                        </div>
+                                    </div>                                   
+
+                                  </div>
+
+                                   <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <button class="btn btn-success"type="submit"><i class="fa fa-save"></i> Guardar</button>
+                                        
+                                    <a class="btn btn-danger" th:href="@{/personal/listarPersonal}" type="button"> <i class="fa fa-arrow-circle-left"> Cancelar</i></a>
+                                    
+                                    </div>
+
+
+
+                                </form>
+                            </div>
+							</div>	</section>
+	</main>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+
 </html>

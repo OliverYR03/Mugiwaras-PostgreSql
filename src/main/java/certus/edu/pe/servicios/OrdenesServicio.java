@@ -35,7 +35,7 @@ public class OrdenesServicio {
 		Ordenes ordenesActual = repositorio.findById(ordenesActualizar.getIdorden()).get();
 		
 		ordenesActual.setIdorden(ordenesActualizar.getIdorden());
-		ordenesActual.setIdcliente(ordenesActualizar.getIdcliente());
+		ordenesActual.setClientes(ordenesActualizar.getClientes());
 		ordenesActual.setFecha(ordenesActualizar.getFecha());
 		ordenesActual.setPlatos(ordenesActualizar.getPlatos());
 		ordenesActual.setTotal(ordenesActualizar.getTotal());
